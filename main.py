@@ -49,22 +49,19 @@ def process_input(board: list[list[str]], user: int) -> None:
             input_ = ''
 
 
+def display_winning_message(user: int) -> None:
+    f = Figlet(font="block", width=80)
+    winning_text = f"Congrats User{user} !\nYou Win!" if user != 3 else f"Draw!"
+    print(f.renderText(winning_text))
+
+
 def draw_board(board: list[list[str]]) -> None:
-    # for row in board:
-    #     for cell in row:
-    #         if cell is row[-1]:
-    #             print(f" {cell} ")
-    #         else:
-    #             print(f" {cell} |", end="")
     for row_num in range(len(board)):
         for col_num in range(len(board[row_num])):
             if col_num == len(board) - 1:
                 print(f" {board[row_num][col_num]} ")
             else:
                 print(f" {board[row_num][col_num]} |", end='')
-
-
-
 
 
 def tictactoe(board: list[list[str]]):
@@ -76,6 +73,7 @@ def tictactoe(board: list[list[str]]):
         draw_board(board)
         user += 1
         user %= 2
+    display_winning_message(check_win(board))
 
 
 def main():
